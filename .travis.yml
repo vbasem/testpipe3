@@ -9,3 +9,14 @@ install:
 script: 
  - npm test
  - npm run build
+
+script: | 
+  curl -s -L https://detect.synopsys.com/detect.sh | bash -s - --blackduck.url="https://bdscan.daimler.com" \
+   --blackduck.api.token="$(HUB_TOKEN)" \
+   --detect.project.name="Test_FOSSB" --detect.project.version.name="1.0" \
+   --detect.project.codelocation.unmap=true \
+   --detect.report.timeout=36000 --blackduck.timeout=36000 \
+   --detect.yarn.prod.only=true --detect.npm.include.dev.dependencies=false \
+   --detect.notices.report=true 
+
+
